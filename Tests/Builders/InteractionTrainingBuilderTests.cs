@@ -1,5 +1,4 @@
-﻿#if UNITY_EDITOR
-using System;
+﻿using System;
 using System.Collections;
 using System.Linq;
 using Innoactive.Hub.Training;
@@ -15,7 +14,7 @@ using UnityEngine;
 using UnityEngine.TestTools;
 using Object = UnityEngine.Object;
 
-namespace Innoactive.Hub.Unity.Tests.Training.Interaction
+namespace Innoactive.Creator.Core.Tests.Utils.Interaction
 {
     public class InteractionTrainingBuilderTests : RuntimeTests
     {
@@ -188,4 +187,3 @@ namespace Innoactive.Hub.Unity.Tests.Training.Interaction
         }
     }
 }
-#endif
