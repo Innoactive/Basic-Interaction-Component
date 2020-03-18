@@ -1,9 +1,10 @@
 ﻿using System;
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.SceneObjects.Properties;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.SceneObjects.Properties;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.SceneObjects.Interaction.Properties
+namespace Innoactive.Creator.BasicInteraction.Properties
 {
     public interface ISnapZoneProperty : ISceneObjectProperty, ILockable
     {

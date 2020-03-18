@@ -1,7 +1,8 @@
 ﻿using System;
-using Innoactive.Hub.Training.SceneObjects.Properties;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.SceneObjects.Properties;
 
-namespace Innoactive.Hub.Training.SceneObjects.Interaction.Properties
+namespace Innoactive.Creator.BasicInteraction.Properties
 {
     public interface IUsableProperty : ISceneObjectProperty, ILockable
     {

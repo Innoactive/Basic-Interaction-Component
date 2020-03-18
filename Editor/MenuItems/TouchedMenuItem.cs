@@ -1,9 +1,11 @@
-﻿using Innoactive.Hub.Training.Editors.Configuration;
+﻿using Innoactive.Creator.BasicInteraction.Conditions;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.CreatorEditor.UI;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.Conditions.Editors
+namespace Innoactive.CreatorEditor.BasicInteraction.UX.Conditions
 {
-    public class TouchedMenuItem : Menu.Item<ICondition>
+    public class TouchedMenuItem : StepInspectorMenu.Item<ICondition>
     {
         public override GUIContent DisplayedName
         {

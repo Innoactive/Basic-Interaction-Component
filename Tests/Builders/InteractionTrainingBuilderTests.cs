@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-using Innoactive.Hub.Training;
-using Innoactive.Hub.Training.Conditions;
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Interaction.Properties;
-using Innoactive.Hub.Training.SceneObjects.Properties;
-using Innoactive.Hub.Training.Utils.Builders;
-using Innoactive.Hub.Training.Utils.Interaction.Builders;
+using Innoactive.Creator.BasicInteraction.Builders;
+using Innoactive.Creator.BasicInteraction.Conditions;
+using Innoactive.Creator.BasicInteraction.Properties;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Utils.Builders;
+using Innoactive.Creator.Tests.Utils;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using Object = UnityEngine.Object;
 
-namespace Innoactive.Creator.Core.Tests.Utils.Interaction
+namespace Innoactive.Creator.Tests.Interaction
 {
     public class InteractionTrainingBuilderTests : RuntimeTests
     {

@@ -1,10 +1,12 @@
 ﻿using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Interaction.Properties;
-using Innoactive.Hub.Training.Utils;
+using Innoactive.Creator.BasicInteraction.Properties;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.Utils;
 
-namespace Innoactive.Hub.Training.Conditions
+namespace Innoactive.Creator.BasicInteraction.Conditions
 {
     /// <summary>
     /// Condition which is completed when TouchableProperty is touched.
@@ -16,7 +18,7 @@ namespace Innoactive.Hub.Training.Conditions
         public class EntityData : IConditionData
         {
             [DataMember]
-            [DisplayNameAttribute("Touchable object")]
+            [DisplayName("Touchable object")]
             public ScenePropertyReference<ITouchableProperty> TouchableProperty { get; set; }
 
             public bool IsCompleted { get; set; }

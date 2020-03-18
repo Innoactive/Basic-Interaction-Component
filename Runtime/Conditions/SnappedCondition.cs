@@ -1,11 +1,13 @@
 ﻿using System.Runtime.Serialization;
-using Innoactive.Hub.Training.Attributes;
-using Innoactive.Hub.Training.Configuration.Modes;
-using Innoactive.Hub.Training.SceneObjects;
-using Innoactive.Hub.Training.SceneObjects.Interaction.Properties;
-using Innoactive.Hub.Training.Utils;
+using Innoactive.Creator.BasicInteraction.Properties;
+using Innoactive.Creator.Core;
+using Innoactive.Creator.Core.Attributes;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.Configuration.Modes;
+using Innoactive.Creator.Core.SceneObjects;
+using Innoactive.Creator.Core.Utils;
 
-namespace Innoactive.Hub.Training.Conditions
+namespace Innoactive.Creator.BasicInteraction.Conditions
 {
     /// <summary>
     /// Condition which is completed when `Target` is snapped into `ZoneToSnapInto`.
@@ -22,7 +24,7 @@ namespace Innoactive.Hub.Training.Conditions
             public ScenePropertyReference<ISnappableProperty> Target { get; set; }
 
             [DataMember]
-            [DisplayNameAttribute("Zone to snap into")]
+            [DisplayName("Zone to snap into")]
             public ScenePropertyReference<ISnapZoneProperty> ZoneToSnapInto { get; set; }
 
             public bool IsCompleted { get; set; }

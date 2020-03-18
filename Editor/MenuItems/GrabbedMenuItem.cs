@@ -1,10 +1,11 @@
-﻿using Innoactive.Hub.Training.Editors.Configuration;
-using Innoactive.Hub.Training.Interaction.Conditions;
+﻿using Innoactive.Creator.BasicInteraction.Conditions;
+using Innoactive.Creator.Core.Conditions;
+using Innoactive.CreatorEditor.UI;
 using UnityEngine;
 
-namespace Innoactive.Hub.Training.Conditions.Interaction.Editors
+namespace Innoactive.CreatorEditor.BasicInteraction.UX.Conditions
 {
-    public class GrabbedMenuItem : Menu.Item<ICondition>
+    public class GrabbedMenuItem : StepInspectorMenu.Item<ICondition>
     {
         public override GUIContent DisplayedName
         {
