@@ -3,7 +3,7 @@ using Innoactive.Creator.Core.Conditions;
 using Innoactive.CreatorEditor.UI;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.BasicInteraction.UX.Conditions
+namespace Innoactive.CreatorEditor.BasicInteraction.UI.Conditions
 {
     public class ReleasedMenuItem : StepInspectorMenu.Item<ICondition>
     {
