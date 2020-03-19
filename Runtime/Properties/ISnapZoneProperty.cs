@@ -1,7 +1,7 @@
 ﻿using System;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Properties;
 using UnityEngine;
 
 namespace Innoactive.Creator.BasicInteraction.Properties

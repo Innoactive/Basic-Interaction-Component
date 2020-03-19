@@ -1,6 +1,6 @@
 ﻿using System;
 using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.SceneObjects.Properties;
+using Innoactive.Creator.Core.Properties;
 
 namespace Innoactive.Creator.BasicInteraction.Properties
 {
