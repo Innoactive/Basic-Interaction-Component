@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.BasicInteraction.Builders;
 using Innoactive.Creator.BasicInteraction.Conditions;
 using Innoactive.Creator.BasicInteraction.Properties;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.SceneObjects;
-using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.Utils.Builders;
 using Innoactive.Creator.Tests.Utils;
 using NUnit.Framework;
