@@ -1,19 +1,12 @@
 ﻿using Innoactive.Creator.BasicInteraction.Conditions;
 using Innoactive.Creator.Core.Conditions;
-using Innoactive.CreatorEditor.UI;
-using UnityEngine;
+using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 
 namespace Innoactive.CreatorEditor.BasicInteraction.UI.Conditions
 {
-    public class SnappedMenuItem : StepInspectorMenu.Item<ICondition>
+    public class SnappedMenuItem : MenuItem<ICondition>
     {
-        public override GUIContent DisplayedName
-        {
-            get
-            {
-                return new GUIContent("Snap Object");
-            }
-        }
+        public override string DisplayedName { get; } = "Snap Object";
 
         public override ICondition GetNewItem()
         {

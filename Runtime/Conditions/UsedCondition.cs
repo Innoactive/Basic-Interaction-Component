@@ -30,20 +30,27 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             public Metadata Metadata { get; set; }
         }
 
-        private class ActiveProcess : BaseStageProcessOverCompletable<EntityData>
+        private class ActiveProcess : BaseActiveProcessOverCompletable<EntityData>
         {
-            protected override bool CheckIfCompleted(EntityData data)
+            public ActiveProcess(EntityData data) : base(data)
             {
-                return data.UsableProperty.Value.IsBeingUsed;
+            }
+
+            protected override bool CheckIfCompleted()
+            {
+                return Data.UsableProperty.Value.IsBeingUsed;
             }
         }
 
-        private class EntityAutocompleter : BaseAutocompleter<EntityData>
+        private class EntityAutocompleter : Autocompleter<EntityData>
         {
-            public override void Complete(EntityData data)
+            public EntityAutocompleter(EntityData data) : base(data)
             {
-                data.UsableProperty.Value.FastForwardUse();
-                base.Complete(data);
+            }
+
+            public override void Complete()
+            {
+                Data.UsableProperty.Value.FastForwardUse();
             }
         }
 
@@ -57,30 +64,18 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
 
         public UsedCondition(string target, string name = "Use Object")
         {
-            Data = new EntityData()
-            {
-                UsableProperty = new ScenePropertyReference<IUsableProperty>(target),
-                Name = name
-            };
+            Data.UsableProperty = new ScenePropertyReference<IUsableProperty>(target);
+            Data.Name = name;
         }
 
-        private readonly IProcess<EntityData> process = new ActiveOnlyProcess<EntityData>(new ActiveProcess());
-        private readonly IAutocompleter<EntityData> autocompleter = new EntityAutocompleter();
-
-        protected override IProcess<EntityData> Process
+        public override IProcess GetActiveProcess()
         {
-            get
-            {
-                return process;
-            }
+            return new ActiveProcess(Data);
         }
 
-        protected override IAutocompleter<EntityData> Autocompleter
+        protected override IAutocompleter GetAutocompleter()
         {
-            get
-            {
-                return autocompleter;
-            }
+            return new EntityAutocompleter(Data);
         }
     }
 }

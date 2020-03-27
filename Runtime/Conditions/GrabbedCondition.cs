@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using Innoactive.Creator.BasicInteraction.Properties;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
@@ -31,37 +30,26 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             public Metadata Metadata { get; set; }
         }
 
-        private class EntityAutocompleter : BaseAutocompleter<EntityData>
+        private class EntityAutocompleter : Autocompleter<EntityData>
         {
-            public override void Complete(EntityData data)
+            public EntityAutocompleter(EntityData data) : base(data)
             {
-                data.GrabbableProperty.Value.FastForwardGrab();
-                base.Complete(data);
+            }
+
+            public override void Complete()
+            {
+                Data.GrabbableProperty.Value.FastForwardGrab();
             }
         }
 
-        private class ActiveProcess : IStageProcess<EntityData>
+        private class ActiveProcess : BaseActiveProcessOverCompletable<EntityData>
         {
-            public void Start(EntityData data)
+            protected override bool CheckIfCompleted()
             {
-                data.IsCompleted = false;
+                return Data.GrabbableProperty.Value.IsGrabbed;
             }
 
-            public IEnumerator Update(EntityData data)
-            {
-                while (data.GrabbableProperty.Value.IsGrabbed == false)
-                {
-                    yield return null;
-                }
-
-                data.IsCompleted = true;
-            }
-
-            public void End(EntityData data)
-            {
-            }
-
-            public void FastForward(EntityData data)
+            public ActiveProcess(EntityData data) : base(data)
             {
             }
         }
@@ -76,24 +64,18 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
 
         public GrabbedCondition(string target, string name = "Grab Object")
         {
-            Data = new EntityData()
-            {
-                GrabbableProperty = new ScenePropertyReference<IGrabbableProperty>(target),
-                Name = name
-            };
+            Data.GrabbableProperty = new ScenePropertyReference<IGrabbableProperty>(target);
+            Data.Name = name;
         }
 
-        private readonly IProcess<EntityData> process = new ActiveOnlyProcess<EntityData>(new ActiveProcess());
-        private readonly IAutocompleter<EntityData> autocompleter = new EntityAutocompleter();
-
-        protected override IProcess<EntityData> Process
+        public override IProcess GetActiveProcess()
         {
-            get { return process; }
+            return new ActiveProcess(Data);
         }
 
-        protected override IAutocompleter<EntityData> Autocompleter
+        protected override IAutocompleter GetAutocompleter()
         {
-            get { return autocompleter; }
+            return new EntityAutocompleter(Data);
         }
     }
 }

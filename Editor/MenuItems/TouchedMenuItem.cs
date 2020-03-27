@@ -1,19 +1,12 @@
 ﻿using Innoactive.Creator.BasicInteraction.Conditions;
 using Innoactive.Creator.Core.Conditions;
-using Innoactive.CreatorEditor.UI;
-using UnityEngine;
+using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 
 namespace Innoactive.CreatorEditor.BasicInteraction.UI.Conditions
 {
-    public class TouchedMenuItem : StepInspectorMenu.Item<ICondition>
+    public class TouchedMenuItem : MenuItem<ICondition>
     {
-        public override GUIContent DisplayedName
-        {
-            get
-            {
-                return new GUIContent("Touch Object");
-            }
-        }
+        public override string DisplayedName { get; } = "Touch Object";
 
         public override ICondition GetNewItem()
         {

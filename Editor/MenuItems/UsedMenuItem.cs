@@ -1,16 +1,12 @@
 ﻿using Innoactive.Creator.BasicInteraction.Conditions;
 using Innoactive.Creator.Core.Conditions;
-using Innoactive.CreatorEditor.UI;
-using UnityEngine;
+using Innoactive.CreatorEditor.UI.StepInspector.Menu;
 
 namespace Innoactive.CreatorEditor.BasicInteraction.UI.Conditions
 {
-    public class UsedMenuItem : StepInspectorMenu.Item<ICondition>
+    public class UsedMenuItem : MenuItem<ICondition>
     {
-        public override GUIContent DisplayedName
-        {
-            get { return new GUIContent("Use Object"); }
-        }
+        public override string DisplayedName { get; } = "Use Object";
 
         public override ICondition GetNewItem()
         {

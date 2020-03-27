@@ -36,28 +36,39 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             public Metadata Metadata { get; set; }
         }
 
-        private class ActiveProcess : BaseStageProcessOverCompletable<EntityData>
+        private class ActiveProcess : BaseActiveProcessOverCompletable<EntityData>
         {
-            protected override bool CheckIfCompleted(EntityData data)
+            public ActiveProcess(EntityData data) : base(data)
             {
-                return data.Target.Value.IsSnapped && (data.ZoneToSnapInto.Value == null || data.ZoneToSnapInto.Value == data.Target.Value.SnappedZone);
+            }
+
+            protected override bool CheckIfCompleted()
+            {
+                return Data.Target.Value.IsSnapped && (Data.ZoneToSnapInto.Value == null || Data.ZoneToSnapInto.Value == Data.Target.Value.SnappedZone);
             }
         }
 
-        private class EntityAutocompleter : BaseAutocompleter<EntityData>
+        private class EntityAutocompleter : Autocompleter<EntityData>
         {
-            public override void Complete(EntityData data)
+            public EntityAutocompleter(EntityData data) : base(data)
             {
-                data.Target.Value.FastForwardSnapInto(data.ZoneToSnapInto.Value);
-                base.Complete(data);
+            }
+
+            public override void Complete()
+            {
+                Data.Target.Value.FastForwardSnapInto(Data.ZoneToSnapInto.Value);
             }
         }
 
-        private class EntityConfigurator : IConfigurator<EntityData>
+        private class EntityConfigurator : Configurator<EntityData>
         {
-            public void Configure(EntityData data, IMode mode, Stage stage)
+            public EntityConfigurator(EntityData data) : base(data)
             {
-                data.ZoneToSnapInto.Value.Configure(mode);
+            }
+
+            public override void Configure(IMode mode, Stage stage)
+            {
+                Data.ZoneToSnapInto.Value.Configure(mode);
             }
         }
 
@@ -71,42 +82,24 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
 
         public SnappedCondition(string target, string snapZone, string name = "Snap Object")
         {
-            Data = new EntityData()
-            {
-                Target = new ScenePropertyReference<ISnappableProperty>(target),
-                ZoneToSnapInto = new ScenePropertyReference<ISnapZoneProperty>(snapZone),
-                Name = name
-            };
+            Data.Target = new ScenePropertyReference<ISnappableProperty>(target);
+            Data.ZoneToSnapInto = new ScenePropertyReference<ISnapZoneProperty>(snapZone);
+            Data.Name = name;
         }
 
-        private readonly IAutocompleter<EntityData> autocompleter = new EntityAutocompleter();
-
-        protected override IAutocompleter<EntityData> Autocompleter
+        public override IProcess GetActiveProcess()
         {
-            get
-            {
-                return autocompleter;
-            }
+            return new ActiveProcess(Data);
         }
 
-        private readonly IProcess<EntityData> process = new ActiveOnlyProcess<EntityData>(new ActiveProcess());
-
-        protected override IProcess<EntityData> Process
+        protected override IConfigurator GetConfigurator()
         {
-            get
-            {
-                return process;
-            }
+            return new EntityConfigurator(Data);
         }
 
-        private readonly IConfigurator<EntityData> configurator = new EntityConfigurator();
-
-        protected override IConfigurator<EntityData> Configurator
+        protected override IAutocompleter GetAutocompleter()
         {
-            get
-            {
-                return configurator;
-            }
+            return new EntityAutocompleter(Data);
         }
     }
 }
