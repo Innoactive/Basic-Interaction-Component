@@ -10,7 +10,7 @@ namespace Innoactive.CreatorEditor.BasicInteraction
     {
         /// <inheritdoc />
         public override int Priority { get; } = 10;
-        
+
         /// <inheritdoc />
         public override string Key { get; } = "InteractionFrameworkSetup";
 
@@ -21,7 +21,7 @@ namespace Innoactive.CreatorEditor.BasicInteraction
         {
             if (Camera.main != null)
             {
-                Object.DestroyImmediate(Camera.main);
+                Object.DestroyImmediate(Camera.main.gameObject);
             }
         }
     }
