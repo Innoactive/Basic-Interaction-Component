@@ -4,7 +4,7 @@ using Innoactive.Creator.BasicInteraction.Properties;
 using Innoactive.Creator.Core.Configuration;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Utils;
-using Innoactive.Creator.Core.Utils.Builders;
+using Innoactive.Creator.Tests.Builder;
 
 namespace Innoactive.Creator.BasicInteraction.Builders
 {
