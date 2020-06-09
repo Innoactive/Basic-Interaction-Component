@@ -25,9 +25,11 @@ namespace Innoactive.Creator.Tests.Interaction
             {
                 throw new NotImplementedException();
             }
-
+#pragma warning disable CS0067 // Disable "event is never used" warning.
             public event EventHandler<EventArgs> ObjectSnapped;
             public event EventHandler<EventArgs> ObjectUnsnapped;
+#pragma warning restore CS0067
+
             
             public bool IsObjectSnapped { get; }
             
@@ -43,8 +45,10 @@ namespace Innoactive.Creator.Tests.Interaction
         
         private class DummySnappableProperty : TrainingSceneObjectProperty, ISnappableProperty
         {
+#pragma warning disable CS0067 // Disable "event is never used" warning.
             public event EventHandler<EventArgs> Snapped;
             public event EventHandler<EventArgs> Unsnapped;
+#pragma warning restore CS0067
             
             public bool IsSnapped { get; }
             
@@ -64,9 +68,11 @@ namespace Innoactive.Creator.Tests.Interaction
             {
                 throw new NotImplementedException();
             }
-
+            
+#pragma warning disable CS0067 // Disable "event is never used" warning.
             public event EventHandler<EventArgs> UsageStarted;
             public event EventHandler<EventArgs> UsageStopped;
+#pragma warning restore CS0067
             
             public bool IsBeingUsed { get; }
              
@@ -82,12 +88,14 @@ namespace Innoactive.Creator.Tests.Interaction
             {
                 throw new NotImplementedException();
             }
-
+            
+#pragma warning disable CS0067 // Disable "event is never used" warning.
             public event EventHandler<EventArgs> Touched;
             public event EventHandler<EventArgs> Untouched;
+#pragma warning restore CS0067
             
             public bool IsBeingTouched { get; }
-            
+
             public void FastForwardTouch()
             {
                 throw new NotImplementedException();
