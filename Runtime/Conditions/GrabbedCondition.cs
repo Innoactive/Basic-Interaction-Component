@@ -1,8 +1,11 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 using Innoactive.Creator.BasicInteraction.Properties;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Utils;
 
@@ -20,7 +23,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             [DataMember]
             [DisplayName("Grabbable object")]
             public ScenePropertyReference<IGrabbableProperty> GrabbableProperty { get; set; }
-
+            
             public bool IsCompleted { get; set; }
 
             [DataMember]
@@ -66,6 +69,17 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
         {
             Data.GrabbableProperty = new ScenePropertyReference<IGrabbableProperty>(target);
             Data.Name = name;
+        }
+        
+        public override IEnumerable<LockablePropertyData> GetLockableProperties()
+        {
+            IEnumerable<LockablePropertyData> references = base.GetLockableProperties();
+            foreach (LockablePropertyData propertyData in references)
+            {
+                propertyData.EndStepLocked = false;
+            }
+
+            return references;
         }
 
         public override IProcess GetActiveProcess()
