@@ -30,6 +30,10 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             [HideInTrainingInspector]
             public string Name { get; set; }
 
+            [DataMember]
+            [DisplayName("Keep object grabbable after step")]
+            public bool KeepUnlocked = true;
+
             public Metadata Metadata { get; set; }
         }
 
@@ -76,7 +80,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             IEnumerable<LockablePropertyData> references = base.GetLockableProperties();
             foreach (LockablePropertyData propertyData in references)
             {
-                propertyData.EndStepLocked = false;
+                propertyData.EndStepLocked = !Data.KeepUnlocked;
             }
 
             return references;
