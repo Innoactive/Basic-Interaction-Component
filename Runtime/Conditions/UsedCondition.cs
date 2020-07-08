@@ -1,8 +1,11 @@
-﻿using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Serialization;
 using Innoactive.Creator.BasicInteraction.Properties;
 using Innoactive.Creator.Core;
 using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Conditions;
+using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Utils;
 
@@ -26,7 +29,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             [DataMember]
             [HideInTrainingInspector]
             public string Name { get; set; }
-
+            
             public Metadata Metadata { get; set; }
         }
 
@@ -66,6 +69,23 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
         {
             Data.UsableProperty = new ScenePropertyReference<IUsableProperty>(target);
             Data.Name = name;
+        }
+        
+        public override IEnumerable<LockablePropertyData> GetLockableProperties()
+        {
+            IEnumerable<LockablePropertyData> references = base.GetLockableProperties();
+            // Only if UseableProperty required grab, keep it unlocked.
+            if (references.Any(data => data.Property is IGrabbableProperty))
+            {
+                foreach (LockablePropertyData propertyData in references)
+                {
+                    if (propertyData.Property is IGrabbableProperty || propertyData.Property is ITouchableProperty)
+                    {
+                        propertyData.EndStepLocked = false;
+                    }
+                }
+            }
+            return references;
         }
 
         public override IProcess GetActiveProcess()
