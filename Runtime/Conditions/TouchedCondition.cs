@@ -5,6 +5,7 @@ using Innoactive.Creator.Core.Attributes;
 using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Utils;
+using Innoactive.Creator.Core.Validation;
 
 namespace Innoactive.Creator.BasicInteraction.Conditions
 {
@@ -17,6 +18,9 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
         [DisplayName("Touch Object")]
         public class EntityData : IConditionData
         {
+#if CREATOR_PRO     
+            [CheckForCollider]
+#endif
             [DataMember]
             [DisplayName("Touchable object")]
             public ScenePropertyReference<ITouchableProperty> TouchableProperty { get; set; }

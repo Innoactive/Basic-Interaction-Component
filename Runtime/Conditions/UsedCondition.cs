@@ -8,6 +8,7 @@ using Innoactive.Creator.Core.Conditions;
 using Innoactive.Creator.Core.RestrictiveEnvironment;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Utils;
+using Innoactive.Creator.Core.Validation;
 
 namespace Innoactive.Creator.BasicInteraction.Conditions
 {
@@ -20,6 +21,9 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
         [DisplayName("Use Object")]
         public class EntityData : IConditionData
         {
+#if CREATOR_PRO              
+            [CheckForCollider]
+#endif
             [DataMember]
             [DisplayName("Usable object")]
             public ScenePropertyReference<IUsableProperty> UsableProperty { get; set; }
