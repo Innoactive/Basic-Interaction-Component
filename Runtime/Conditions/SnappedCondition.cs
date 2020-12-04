@@ -29,6 +29,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
 
 #if CREATOR_PRO        
             [CheckForCollider]
+            [ColliderAreTrigger]
 #endif
             [DataMember]
             [DisplayName("Zone to snap into")]
