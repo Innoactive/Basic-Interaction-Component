@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Innoactive.Creator.Components.Runtime.SceneSetup;
 using Innoactive.Creator.Core.Properties;
+using Innoactive.Creator.Core.Utils;
 using UnityEngine;
 
 /// <summary>
@@ -10,22 +12,34 @@ using UnityEngine;
 /// </summary>
 public class InteractionRigSetup : MonoBehaviour
 {
-    public List<InteractionRigProvider> PossibleInteractionRigs;
+    [Serializable]
+    public struct RigInfo
+    {
+        public string Name;
+        public bool Enabled;
+    }
+    
+    [SerializeField]
+    public RigInfo[] PossibleInteractionRigs = new RigInfo[0];
 
     protected static InteractionRigProvider enforcedProvider = null;
     
     void Awake()
     {
-        InteractionRigProvider rigProvider = PossibleInteractionRigs.FirstOrDefault(provider => provider.Enabled && provider.CanBeUsed());
-
+        InteractionRigProvider rigProvider = null;
+        
         if (enforcedProvider != null)
         {
             rigProvider = enforcedProvider;
         }
+        else if (PossibleInteractionRigs != null)
+        {
+            rigProvider = FindAvailableInteractionRig();
+        }
 
+        GameObject trainee = FindObjectOfType<TraineeSceneObject>().gameObject;
         if (rigProvider != null)
         {
-            GameObject trainee = FindObjectOfType<TraineeSceneObject>().gameObject;
             Vector3 position = trainee.transform.position;
             Quaternion rotation = trainee.transform.rotation;
             
@@ -35,9 +49,35 @@ public class InteractionRigSetup : MonoBehaviour
             instance.name = instance.name.Replace("(Clone)", "");
             instance.transform.position = position;
             instance.transform.rotation = rotation;
+            
+            rigProvider.OnSetup();
+        }
+        else if (trainee != null)
+        {
+            DestroyImmediate(trainee);
         }
     }
-    
+
+    private InteractionRigProvider FindAvailableInteractionRig()
+    {
+        IEnumerable<InteractionRigProvider> availableRigs = ReflectionUtils.GetFinalImplementationsOf<InteractionRigProvider>()
+            .Select(type => (InteractionRigProvider) ReflectionUtils.CreateInstanceOfType(type));
+
+        foreach (RigInfo rigInfo in PossibleInteractionRigs)
+        {
+            if (rigInfo.Enabled)
+            {
+                InteractionRigProvider provider = availableRigs.FirstOrDefault(p => p.Name == rigInfo.Name);
+                if (provider != null)
+                {
+                    return provider;
+                }
+            }
+        }
+
+        return null;
+    }
+
     /// <summary>
     /// Enforces the giving Rig to be used, if possible.
     /// </summary>

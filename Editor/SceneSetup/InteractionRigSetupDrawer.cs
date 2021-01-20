@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Innoactive.Creator.Components.Runtime.SceneSetup;
 using Innoactive.Creator.Core.Utils;
 using UnityEditor;
@@ -15,16 +17,11 @@ internal class InteractionRigSetupDrawer : Editor
     {
         InteractionRigSetup rigSetup = (InteractionRigSetup)target;
 
-        rigSetup.PossibleInteractionRigs = rigSetup.PossibleInteractionRigs.FindAll(provider => provider != null);
-
-        foreach (InteractionRigProvider provider in ReflectionUtils.GetFinalImplementationsOf<InteractionRigProvider>().Select(type => (InteractionRigProvider)CreateInstance(type)))
+        if (Application.isPlaying == false)
         {
-            if (rigSetup.PossibleInteractionRigs.All(rigProvider => rigProvider.Name != provider.Name))
-            {
-                rigSetup.PossibleInteractionRigs.Add(provider);
-            }  
+            UpdateRigList(rigSetup);
         }
-        
+
         list = new ReorderableList(serializedObject, 
             serializedObject.FindProperty("PossibleInteractionRigs"), 
             true, true, false, false);
@@ -36,37 +33,42 @@ internal class InteractionRigSetupDrawer : Editor
         list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
         {
             Rect labelRect = new Rect(rect.x, rect.y, rect.width - EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
-            string text = "null";
-            if (rigSetup.PossibleInteractionRigs[index] != null)
-            {
-                text = rigSetup.PossibleInteractionRigs[index].Name;
-            }
-            EditorGUI.LabelField(labelRect, text);
+            EditorGUI.LabelField(labelRect, rigSetup.PossibleInteractionRigs[index].Name);
             
             Rect toggleRect = new Rect(rect.x + labelRect.width, rect.y, EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
-            rigSetup.PossibleInteractionRigs[index].Enabled =
-                EditorGUI.Toggle(toggleRect, rigSetup.PossibleInteractionRigs[index].Enabled);
+            rigSetup.PossibleInteractionRigs[index].Enabled = EditorGUI.Toggle(toggleRect, rigSetup.PossibleInteractionRigs[index].Enabled);
         };
 
         list.drawFooterCallback = rect => { };
+    }
 
-        list.onAddCallback = reorderableList =>
-        {
-            rigSetup.PossibleInteractionRigs.Add(null);
-        };
+    private static void UpdateRigList(InteractionRigSetup rigSetup)
+    {
+        List<InteractionRigSetup.RigInfo> rigs = rigSetup.PossibleInteractionRigs.ToList();
 
-        list.onRemoveCallback = reorderableList =>
+        IEnumerable<Type> foundTypes = ReflectionUtils.GetConcreteImplementationsOf<InteractionRigProvider>();
+        IEnumerable<InteractionRigProvider> foundProvider = foundTypes.Select(type => (InteractionRigProvider) ReflectionUtils.CreateInstanceOfType(type));
+
+        foreach (InteractionRigProvider provider in foundProvider)
         {
-            rigSetup.PossibleInteractionRigs.RemoveAt(reorderableList.index);
-        };
+            if (rigs.All(rigProvider => rigProvider.Name != provider.Name))
+            {
+                rigs.Add(new InteractionRigSetup.RigInfo()
+                {
+                    Name =  provider.Name,
+                    Enabled = true,
+                }); 
+            }
+        }
+
+        rigSetup.PossibleInteractionRigs = rigs.ToArray();
     }
 
     public override void OnInspectorGUI()
     {
         GUILayout.Box("Enable/Disable available interaction Rigs, you are also able to prioritize them by changing the position in the array. Top most has the highest priority. The interaction Rig will be spawned at the [TRAINEE] GameObject.");
-        
         serializedObject.Update();
         list.DoLayoutList();
-        serializedObject.ApplyModifiedProperties();
+        //serializedObject.ApplyModifiedProperties();
     }
 }

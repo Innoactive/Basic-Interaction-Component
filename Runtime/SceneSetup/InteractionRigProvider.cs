@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
@@ -6,11 +7,12 @@ using UnityEngine;
 
 namespace Innoactive.Creator.Components.Runtime.SceneSetup
 {
-    public abstract class InteractionRigProvider : ScriptableObject
+    public abstract class InteractionRigProvider
     {
         public bool Enabled = true;
-        
+
         public abstract string Name { get; }
+        
         public abstract string PrefabName { get; }
 
         public virtual bool CanBeUsed()
@@ -21,6 +23,11 @@ namespace Innoactive.Creator.Components.Runtime.SceneSetup
         public GameObject GetPrefab()
         {
             return FindPrefab(PrefabName);
+        }
+
+        public virtual void OnSetup()
+        {
+            // Allow additional actions.
         }
         
         protected GameObject FindPrefab(string prefab)
