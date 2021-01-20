@@ -61,7 +61,8 @@ public class InteractionRigSetup : MonoBehaviour
     private InteractionRigProvider FindAvailableInteractionRig()
     {
         IEnumerable<InteractionRigProvider> availableRigs = ReflectionUtils.GetFinalImplementationsOf<InteractionRigProvider>()
-            .Select(type => (InteractionRigProvider) ReflectionUtils.CreateInstanceOfType(type));
+            .Select(type => (InteractionRigProvider) ReflectionUtils.CreateInstanceOfType(type))
+            .Where(provider => provider.CanBeUsed());
 
         foreach (RigInfo rigInfo in PossibleInteractionRigs)
         {
