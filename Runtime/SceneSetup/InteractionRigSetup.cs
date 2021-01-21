@@ -12,6 +12,9 @@ using UnityEngine;
 /// </summary>
 public class InteractionRigSetup : MonoBehaviour
 {
+    /// <summary>
+    /// Info struct about one rig.
+    /// </summary>
     [Serializable]
     public struct RigInfo
     {
@@ -24,7 +27,7 @@ public class InteractionRigSetup : MonoBehaviour
 
     protected static InteractionRigProvider enforcedProvider = null;
     
-    void Awake()
+    private void Awake()
     {
         InteractionRigProvider rigProvider = null;
         

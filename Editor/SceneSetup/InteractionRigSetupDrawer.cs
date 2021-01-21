@@ -69,6 +69,6 @@ internal class InteractionRigSetupDrawer : Editor
         GUILayout.Box("Enable/Disable available interaction Rigs, you are also able to prioritize them by changing the position in the array. Top most has the highest priority. The interaction Rig will be spawned at the [TRAINEE] GameObject.");
         serializedObject.Update();
         list.DoLayoutList();
-        //serializedObject.ApplyModifiedProperties();
+        serializedObject.ApplyModifiedProperties();
     }
 }
