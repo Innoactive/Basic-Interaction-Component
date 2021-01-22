@@ -35,7 +35,7 @@ namespace Innoactive.CreatorEditor.BasicInteraction.Setup
 
             list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
-                bool canBeUsed = foundProvider[index].CanBeUsed();
+                bool canBeUsed = foundProvider == null || foundProvider[index].CanBeUsed();
                 
                 Rect labelRect = new Rect(rect.x, rect.y, rect.width - 2 * EditorGUIUtility.singleLineHeight - 4,
                     EditorGUIUtility.singleLineHeight);
