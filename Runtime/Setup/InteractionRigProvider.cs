@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
-namespace Innoactive.Creator.Components.Runtime.SceneSetup
+namespace Innoactive.Creator.BasicInteraction.Setup
 {
     /// <summary>
     /// Provides all information and methods to setup a scene with a fitting and working rig.
@@ -28,6 +28,14 @@ namespace Innoactive.Creator.Components.Runtime.SceneSetup
         public virtual bool CanBeUsed()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Returns the tooltip which should be shown when this rig cannot be used.
+        /// </summary>
+        public virtual string GetSetupTooltip()
+        {
+            return "";
         }
 
         /// <summary>

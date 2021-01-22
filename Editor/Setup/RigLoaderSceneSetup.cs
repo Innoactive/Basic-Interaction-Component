@@ -1,7 +1,8 @@
-﻿using Innoactive.Creator.Core.Properties;
+﻿using Innoactive.Creator.BasicInteraction.Setup;
+using Innoactive.Creator.Core.Properties;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.BasicInteraction
+namespace Innoactive.CreatorEditor.BasicInteraction.Setup
 {
     /// <summary>
     /// Setups the rig loader, cleans up the scene and creates a dummy trainee. 
