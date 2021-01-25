@@ -1,11 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using UnityEditor;
+﻿using System.IO;
 using UnityEngine;
 
-namespace Innoactive.Creator.BasicInteraction.Setup
+namespace Innoactive.Creator.BasicInteraction.RigSetup
 {
     /// <summary>
     /// Provides all information and methods to setup a scene with a fitting and working rig.
@@ -60,19 +56,7 @@ namespace Innoactive.Creator.BasicInteraction.Setup
         /// <exception cref="FileNotFoundException"></exception>
         protected GameObject FindPrefab(string prefab)
         {
-            string filter = $"{prefab} t:Prefab";
-            string[] prefabsGUIDs = AssetDatabase.FindAssets(filter, null);
-
-            if (prefabsGUIDs.Any() == false)
-            {
-                throw new FileNotFoundException($"No prefabs found that match \"{prefab}\".");
-            }
-
-            string assetPath = AssetDatabase.GUIDToAssetPath(prefabsGUIDs.First());
-            string[] brokenPaths = Regex.Split(assetPath, "Resources/");
-            string relativePath = brokenPaths.Last().Replace(".prefab", string.Empty);
-
-            return Resources.Load(relativePath, typeof(GameObject)) as GameObject;
+            return Resources.Load(prefab, typeof(GameObject)) as GameObject;
         }
     }
 }

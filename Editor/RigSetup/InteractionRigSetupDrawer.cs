@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.BasicInteraction.Setup;
+using Innoactive.Creator.BasicInteraction.RigSetup;
 using Innoactive.Creator.Core.Utils;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 
-namespace Innoactive.CreatorEditor.BasicInteraction.Setup
+namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
 {
     [CustomEditor(typeof(InteractionRigSetup))]
     internal class InteractionRigSetupDrawer : Editor

@@ -1,4 +1,4 @@
-﻿namespace Innoactive.CreatorEditor.BasicInteraction.Setup
+﻿namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
 {
     /// <summary>
     /// This base class is supposed to be implemented by classes which will be called to setup the scene,
