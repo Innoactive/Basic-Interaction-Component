@@ -24,9 +24,15 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
             public bool Enabled;
         }
         
+        /// <summary>
+        /// Information about possible interaction rigs, serializable.
+        /// </summary>
         [SerializeField]
         public RigInfo[] PossibleInteractionRigs = new RigInfo[0];
 
+        /// <summary>
+        /// Enforced provider will be use.
+        /// </summary>
         protected static InteractionRigProvider enforcedProvider = null;
         
         private void Awake()

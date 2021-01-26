@@ -1,5 +1,4 @@
-﻿using System.IO;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Innoactive.Creator.BasicInteraction.RigSetup
 {
@@ -53,7 +52,6 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
         /// <summary>
         /// Searches the given prefab name and returns it.
         /// </summary>
-        /// <exception cref="FileNotFoundException"></exception>
         protected GameObject FindPrefab(string prefab)
         {
             return Resources.Load(prefab, typeof(GameObject)) as GameObject;

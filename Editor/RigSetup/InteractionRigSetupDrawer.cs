@@ -9,9 +9,12 @@ using UnityEngine;
 
 namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
 {
+    
     [CustomEditor(typeof(InteractionRigSetup))]
     internal class InteractionRigSetupDrawer : Editor
     {
+        private readonly float lineHeight = EditorGUIUtility.singleLineHeight;
+        
         private ReorderableList list;
 
         private List<InteractionRigProvider> foundProvider = new List<InteractionRigProvider>();
@@ -41,21 +44,20 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
                 }
                 
                 bool canBeUsed = foundProvider == null || foundProvider[index].CanBeUsed();
-                
-                Rect labelRect = new Rect(rect.x, rect.y, rect.width - 2 * EditorGUIUtility.singleLineHeight - 4,
-                    EditorGUIUtility.singleLineHeight);
+
+                Rect labelRect = new Rect(rect.x, rect.y, rect.width - 2 * lineHeight - 4, lineHeight);
                 GUI.enabled = canBeUsed;
                 EditorGUI.LabelField(labelRect, rigSetup.PossibleInteractionRigs[index].Name);
                 GUI.enabled = true;
                 
                 if (!canBeUsed)
                 {
-                    Rect warningRect = new Rect(rect.x + labelRect.width - EditorGUIUtility.singleLineHeight - 4, rect.y, EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
+                    Rect warningRect = new Rect(rect.x + labelRect.width - lineHeight - 4, rect.y, lineHeight, lineHeight);
                     GUIContent labelContent = new GUIContent("", warningIcon.image, foundProvider[index].GetSetupTooltip());
                     EditorGUI.LabelField(warningRect, labelContent);
                 }
                 
-                Rect toggleRect = new Rect(rect.x + labelRect.width, rect.y, EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
+                Rect toggleRect = new Rect(rect.x + labelRect.width, rect.y, lineHeight, lineHeight);
                 rigSetup.PossibleInteractionRigs[index].Enabled =
                     EditorGUI.Toggle(toggleRect, rigSetup.PossibleInteractionRigs[index].Enabled);
             };
