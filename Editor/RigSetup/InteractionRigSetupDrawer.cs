@@ -14,7 +14,7 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
     {
         private ReorderableList list;
 
-        private List<InteractionRigProvider> foundProvider;
+        private List<InteractionRigProvider> foundProvider = new List<InteractionRigProvider>();
         
         private GUIContent warningIcon;
         
@@ -35,6 +35,11 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
 
             list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
+                if (foundProvider.Count == 0)
+                {
+                    UpdateRigList(rigSetup);
+                }
+                
                 bool canBeUsed = foundProvider == null || foundProvider[index].CanBeUsed();
                 
                 Rect labelRect = new Rect(rect.x, rect.y, rect.width - 2 * EditorGUIUtility.singleLineHeight - 4,
@@ -98,7 +103,7 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
             if (warningIcon == null)
             {
                 warningIcon = EditorGUIUtility.IconContent("Warning@2x");
-            } 
+            }
             
             GUILayout.Box(
                 "Enable/Disable available interaction Rigs, you are also able to prioritize them by changing the position in the array. Top most has the highest priority. The interaction Rig will be spawned at the [TRAINEE] GameObject.");
