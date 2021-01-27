@@ -30,6 +30,8 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
             if (trainee == null)
             {
                 SetupPrefab("[TRAINEE]");
+                setup = Object.FindObjectOfType<InteractionRigSetup>();
+                setup.DummyTrainee = GameObject.Find("[TRAINEE]");
             }
         }
 

@@ -23,12 +23,15 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
             public string Name;
             public bool Enabled;
         }
-        
+
         /// <summary>
         /// Information about possible interaction rigs, serializable.
         /// </summary>
         [SerializeField]
         public RigInfo[] PossibleInteractionRigs = new RigInfo[0];
+        
+        [Tooltip("Dummy Trainee object")]
+        public GameObject DummyTrainee;
 
         /// <summary>
         /// Enforced provider will be use.
@@ -48,17 +51,16 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
                 rigProvider = FindAvailableInteractionRig();
             }
 
-            GameObject trainee = FindObjectOfType<TraineeSceneObject>().gameObject;
             if (rigProvider != null)
             {
                 Vector3 position = Vector3.zero;
                 Quaternion rotation = new Quaternion();
 
-                if (trainee != null)
+                if (DummyTrainee != null)
                 {
-                    position = trainee.transform.position;
-                    rotation = trainee.transform.rotation;
-                    DestroyImmediate(trainee);
+                    position = DummyTrainee.transform.position;
+                    rotation = DummyTrainee.transform.rotation;
+                    DestroyImmediate(DummyTrainee);
                 }
 
                 GameObject prefab = rigProvider.GetPrefab();
@@ -72,10 +74,11 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
 
                 rigProvider.OnSetup();
             }
-            else if (trainee != null)
+            else if (DummyTrainee != null)
             {
-                DestroyImmediate(trainee);
+                DestroyImmediate(DummyTrainee);
             }
+            Destroy(gameObject);
         }
 
         private InteractionRigProvider FindAvailableInteractionRig()
