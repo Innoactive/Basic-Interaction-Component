@@ -38,28 +38,32 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
 
             list.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
             {
-                if (foundProvider.Count == 0)
+                if (foundProvider == null || foundProvider.Count == 0 || foundProvider.Count <= index)
                 {
                     UpdateRigList(rigSetup);
                 }
                 
-                bool canBeUsed = foundProvider == null || foundProvider[index].CanBeUsed();
-
                 Rect labelRect = new Rect(rect.x, rect.y, rect.width - 2 * lineHeight - 4, lineHeight);
-                GUI.enabled = canBeUsed;
-                EditorGUI.LabelField(labelRect, rigSetup.PossibleInteractionRigs[index].Name);
-                GUI.enabled = true;
-                
-                if (canBeUsed == false)
+                if (foundProvider?[index] != null)
                 {
-                    Rect warningRect = new Rect(rect.x + labelRect.width - lineHeight - 4, rect.y, lineHeight, lineHeight);
-                    GUIContent labelContent = new GUIContent("", warningIcon.image, foundProvider[index].GetSetupTooltip());
-                    EditorGUI.LabelField(warningRect, labelContent);
-                }
+                    bool canBeUsed = foundProvider[index].CanBeUsed();
+                    GUI.enabled = canBeUsed;
+                    EditorGUI.LabelField(labelRect, rigSetup.PossibleInteractionRigs[index].Name);
+                    GUI.enabled = true;
                 
-                Rect toggleRect = new Rect(rect.x + labelRect.width, rect.y, lineHeight, lineHeight);
-                rigSetup.PossibleInteractionRigs[index].Enabled =
-                    EditorGUI.Toggle(toggleRect, rigSetup.PossibleInteractionRigs[index].Enabled);
+                    if (canBeUsed == false)
+                    {
+                        Rect warningRect = new Rect(rect.x + labelRect.width - lineHeight - 4, rect.y, lineHeight, lineHeight);
+                        GUIContent labelContent = new GUIContent("", warningIcon.image, foundProvider[index].GetSetupTooltip());
+                        EditorGUI.LabelField(warningRect, labelContent);
+                    }
+                }
+                else
+                {
+                    EditorGUI.LabelField(labelRect, "#Error");
+                    UpdateRigList(rigSetup);
+                    Repaint();
+                }
             };
 
             list.onReorderCallback = reorderableList =>
