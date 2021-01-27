@@ -50,7 +50,7 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
                 EditorGUI.LabelField(labelRect, rigSetup.PossibleInteractionRigs[index].Name);
                 GUI.enabled = true;
                 
-                if (!canBeUsed)
+                if (canBeUsed == false)
                 {
                     Rect warningRect = new Rect(rect.x + labelRect.width - lineHeight - 4, rect.y, lineHeight, lineHeight);
                     GUIContent labelContent = new GUIContent("", warningIcon.image, foundProvider[index].GetSetupTooltip());
