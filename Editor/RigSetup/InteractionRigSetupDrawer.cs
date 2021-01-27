@@ -78,6 +78,8 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
             foundProvider = foundTypes.Select(type =>
                 (InteractionRigProvider) ReflectionUtils.CreateInstanceOfType(type)).ToList();
 
+            bool isFirstTime = rigs.Count == 0;
+            
             foreach (InteractionRigProvider provider in foundProvider)
             {
                 if (rigs.All(rigProvider => rigProvider.Name != provider.Name))
@@ -88,6 +90,17 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
                         Enabled = true,
                     });
                 }
+            }
+            
+            // If provider get removed we have to fix the list.
+            rigs.RemoveAll(info => foundProvider.Any(provider => provider.Name == info.Name) == false);
+
+            // On initializing the list we want to move none to lowest priority.
+            if (isFirstTime)
+            {
+                InteractionRigSetup.RigInfo rigInfo = rigs.Find(info => info.Name == "<None>");
+                rigs.Remove(rigInfo);
+                rigs.Add(rigInfo);
             }
             
             OrderFoundProvider(rigSetup);

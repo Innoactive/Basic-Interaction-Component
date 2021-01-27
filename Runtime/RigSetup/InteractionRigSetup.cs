@@ -51,16 +51,25 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
             GameObject trainee = FindObjectOfType<TraineeSceneObject>().gameObject;
             if (rigProvider != null)
             {
-                Vector3 position = trainee.transform.position;
-                Quaternion rotation = trainee.transform.rotation;
-                
-                DestroyImmediate(trainee);
-                
-                GameObject instance = Instantiate(rigProvider.GetPrefab());
-                instance.name = instance.name.Replace("(Clone)", "");
-                instance.transform.position = position;
-                instance.transform.rotation = rotation;
-                
+                Vector3 position = Vector3.zero;
+                Quaternion rotation = new Quaternion();
+
+                if (trainee != null)
+                {
+                    position = trainee.transform.position;
+                    rotation = trainee.transform.rotation;
+                    DestroyImmediate(trainee);
+                }
+
+                GameObject prefab = rigProvider.GetPrefab();
+                if (prefab != null)
+                {
+                    GameObject instance = Instantiate(rigProvider.GetPrefab());
+                    instance.name = instance.name.Replace("(Clone)", "");
+                    instance.transform.position = position;
+                    instance.transform.rotation = rotation;
+                }
+
                 rigProvider.OnSetup();
             }
             else if (trainee != null)

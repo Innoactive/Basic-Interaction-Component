@@ -38,6 +38,11 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
         /// </summary>
         public virtual GameObject GetPrefab()
         {
+            if (string.IsNullOrEmpty(PrefabName))
+            {
+                return null;
+            }
+            
             return FindPrefab(PrefabName);
         }
 
