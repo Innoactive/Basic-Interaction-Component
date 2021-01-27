@@ -80,7 +80,54 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
             }
             Destroy(gameObject);
         }
+        
+        /// <summary>
+        /// Updates the current list of all rigs available.
+        /// </summary>
+        public List<InteractionRigProvider> UpdateRigList()
+        {
+            List<RigInfo> rigs = PossibleInteractionRigs.ToList();
 
+            IEnumerable<Type> foundTypes = ReflectionUtils.GetConcreteImplementationsOf<InteractionRigProvider>();
+            List<InteractionRigProvider> foundProvider = foundTypes.Select(type =>
+                (InteractionRigProvider) ReflectionUtils.CreateInstanceOfType(type)).ToList();
+
+            bool isFirstTime = rigs.Count == 0;
+            
+            foreach (InteractionRigProvider provider in foundProvider)
+            {
+                if (rigs.All(rigProvider => rigProvider.Name != provider.Name))
+                {
+                    rigs.Add(new RigInfo()
+                    {
+                        Name = provider.Name,
+                        Enabled = true,
+                    });
+                }
+            }
+            
+            // If provider get removed we have to fix the list.
+            rigs.RemoveAll(info => foundProvider.Any(provider => provider.Name == info.Name) == false);
+
+            // On initializing the list we want to move none to lowest priority.
+            if (isFirstTime)
+            {
+                RigInfo rigInfo = rigs.Find(info => info.Name == "<None>");
+                rigs.Remove(rigInfo);
+                rigs.Add(rigInfo);
+            }
+            
+            OrderFoundProvider(foundProvider);
+            PossibleInteractionRigs = rigs.ToArray();
+            
+            return foundProvider;
+        }
+
+        private void OrderFoundProvider(List<InteractionRigProvider> foundProvider)
+        {
+            foundProvider = PossibleInteractionRigs.Select(info => foundProvider.Find(provider => provider.Name == info.Name)).ToList();
+        }
+        
         private InteractionRigProvider FindAvailableInteractionRig()
         {
             IEnumerable<InteractionRigProvider> availableRigs = ReflectionUtils.GetFinalImplementationsOf<InteractionRigProvider>()

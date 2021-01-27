@@ -27,7 +27,7 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
             
             if (Application.isPlaying == false)
             {
-                UpdateRigList(rigSetup);
+                foundProvider = rigSetup.UpdateRigList();
             }
 
             list = new ReorderableList(serializedObject,
@@ -40,7 +40,7 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
             {
                 if (foundProvider == null || foundProvider.Count == 0 || foundProvider.Count <= index)
                 {
-                    UpdateRigList(rigSetup);
+                    foundProvider = rigSetup.UpdateRigList();
                 }
                 
                 Rect labelRect = new Rect(rect.x, rect.y, rect.width - 2 * lineHeight - 4, lineHeight);
@@ -61,62 +61,19 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
                 else
                 {
                     EditorGUI.LabelField(labelRect, "#Error");
-                    UpdateRigList(rigSetup);
+                    foundProvider = rigSetup.UpdateRigList();
                     Repaint();
                 }
             };
 
             list.onReorderCallback = reorderableList =>
             {
-                OrderFoundProvider(rigSetup);
+                foundProvider = rigSetup.UpdateRigList();
             }; 
 
             list.drawFooterCallback = rect => { };
         }
 
-        private void UpdateRigList(InteractionRigSetup rigSetup)
-        {
-            List<InteractionRigSetup.RigInfo> rigs = rigSetup.PossibleInteractionRigs.ToList();
-
-            IEnumerable<Type> foundTypes = ReflectionUtils.GetConcreteImplementationsOf<InteractionRigProvider>();
-            foundProvider = foundTypes.Select(type =>
-                (InteractionRigProvider) ReflectionUtils.CreateInstanceOfType(type)).ToList();
-
-            bool isFirstTime = rigs.Count == 0;
-            
-            foreach (InteractionRigProvider provider in foundProvider)
-            {
-                if (rigs.All(rigProvider => rigProvider.Name != provider.Name))
-                {
-                    rigs.Add(new InteractionRigSetup.RigInfo()
-                    {
-                        Name = provider.Name,
-                        Enabled = true,
-                    });
-                }
-            }
-            
-            // If provider get removed we have to fix the list.
-            rigs.RemoveAll(info => foundProvider.Any(provider => provider.Name == info.Name) == false);
-
-            // On initializing the list we want to move none to lowest priority.
-            if (isFirstTime)
-            {
-                InteractionRigSetup.RigInfo rigInfo = rigs.Find(info => info.Name == "<None>");
-                rigs.Remove(rigInfo);
-                rigs.Add(rigInfo);
-            }
-            
-            OrderFoundProvider(rigSetup);
-            rigSetup.PossibleInteractionRigs = rigs.ToArray();
-        }
-
-        private void OrderFoundProvider(InteractionRigSetup rigSetup)
-        {
-            foundProvider = rigSetup.PossibleInteractionRigs
-                .Select(info => foundProvider.Find(provider => provider.Name == info.Name)).ToList();
-        }
-        
         public override void OnInspectorGUI()
         {
             if (warningIcon == null)

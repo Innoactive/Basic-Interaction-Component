@@ -24,13 +24,14 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
             if (setup == null)
             {
                 SetupPrefab("[INTERACTION_RIG_LOADER]");
+                setup = Object.FindObjectOfType<InteractionRigSetup>();
+                setup.UpdateRigList();
             }
             
             TraineeSceneObject trainee = Object.FindObjectOfType<TraineeSceneObject>();
             if (trainee == null)
             {
                 SetupPrefab("[TRAINEE]");
-                setup = Object.FindObjectOfType<InteractionRigSetup>();
                 setup.DummyTrainee = GameObject.Find("[TRAINEE]");
             }
         }
