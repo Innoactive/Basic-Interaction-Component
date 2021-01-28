@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.Core.Utils;
 using UnityEngine;
 

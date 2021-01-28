@@ -42,19 +42,21 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
                 {
                     foundProvider = rigSetup.UpdateRigList();
                 }
+
+                InteractionRigProvider provider = FindProvider(rigSetup.PossibleInteractionRigs[index].Name);
                 
                 Rect labelRect = new Rect(rect.x, rect.y, rect.width - 2 * lineHeight - 4, lineHeight);
-                if (foundProvider?[index] != null)
+                if (provider != null)
                 {
-                    bool canBeUsed = foundProvider[index].CanBeUsed();
+                    bool canBeUsed = provider.CanBeUsed();
                     GUI.enabled = canBeUsed;
-                    EditorGUI.LabelField(labelRect, rigSetup.PossibleInteractionRigs[index].Name);
+                    EditorGUI.LabelField(labelRect, provider.Name);
                     GUI.enabled = true;
                 
                     if (canBeUsed == false)
                     {
                         Rect warningRect = new Rect(rect.x + labelRect.width - lineHeight - 4, rect.y, lineHeight, lineHeight);
-                        GUIContent labelContent = new GUIContent("", warningIcon.image, foundProvider[index].GetSetupTooltip());
+                        GUIContent labelContent = new GUIContent("", warningIcon.image, provider.GetSetupTooltip());
                         EditorGUI.LabelField(warningRect, labelContent);
                     }
                 }
@@ -72,6 +74,11 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
             }; 
 
             list.drawFooterCallback = rect => { };
+        }
+
+        private InteractionRigProvider FindProvider(string name)
+        {
+            return foundProvider.FirstOrDefault(provider => provider.Name == name);
         }
 
         public override void OnInspectorGUI()
