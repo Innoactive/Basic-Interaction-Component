@@ -52,13 +52,17 @@ namespace Innoactive.CreatorEditor.BasicInteraction.RigSetup
                     GUI.enabled = canBeUsed;
                     EditorGUI.LabelField(labelRect, provider.Name);
                     GUI.enabled = true;
-                
+
+                    Rect toggleRect = new Rect(rect.x + rect.width - 2 * lineHeight, rect.y, lineHeight, lineHeight);
+                    rigSetup.PossibleInteractionRigs[index].Enabled = EditorGUI.Toggle(toggleRect, rigSetup.PossibleInteractionRigs[index].Enabled);
+                    
                     if (canBeUsed == false)
                     {
-                        Rect warningRect = new Rect(rect.x + labelRect.width - lineHeight - 4, rect.y, lineHeight, lineHeight);
+                        Rect warningRect = new Rect(rect.x + rect.width - lineHeight, rect.y, lineHeight, lineHeight);
                         GUIContent labelContent = new GUIContent("", warningIcon.image, provider.GetSetupTooltip());
                         EditorGUI.LabelField(warningRect, labelContent);
                     }
+                    
                 }
                 else
                 {
