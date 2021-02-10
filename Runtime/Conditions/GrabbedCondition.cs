@@ -15,6 +15,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
     /// Condition which is completed when `GrabbableProperty` is grabbed.
     /// </summary>
     [DataContract(IsReference = true)]
+    [HelpLink("https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#grab-object")]
     public class GrabbedCondition : Condition<GrabbedCondition.EntityData>
     {
         [DisplayName("Grab Object")]

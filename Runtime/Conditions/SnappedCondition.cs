@@ -14,6 +14,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
     /// Condition which is completed when `Target` is snapped into `ZoneToSnapInto`.
     /// </summary>
     [DataContract(IsReference = true)]
+    [HelpLink("https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#snap-object")]
     public class SnappedCondition : Condition<SnappedCondition.EntityData>
     {
         [DisplayName("Snap Object")]
