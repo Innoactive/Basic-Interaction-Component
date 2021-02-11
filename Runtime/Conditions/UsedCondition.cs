@@ -25,7 +25,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             [CheckForCollider]
 #endif
             [DataMember]
-            [DisplayName("Usable object")]
+            [DisplayName("Object")]
             public ScenePropertyReference<IUsableProperty> UsableProperty { get; set; }
 
             public bool IsCompleted { get; set; }

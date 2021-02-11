@@ -24,7 +24,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             [CheckForCollider]
 #endif
             [DataMember]
-            [DisplayName("Object to snap")]
+            [DisplayName("Object")]
             public ScenePropertyReference<ISnappableProperty> Target { get; set; }
 
 #if CREATOR_PRO        

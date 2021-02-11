@@ -24,7 +24,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             [CheckForCollider]
 #endif
             [DataMember]
-            [DisplayName("Grabbable object")]
+            [DisplayName("Object")]
             public ScenePropertyReference<IGrabbableProperty> GrabbableProperty { get; set; }
             
             public bool IsCompleted { get; set; }
