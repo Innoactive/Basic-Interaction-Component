@@ -13,7 +13,7 @@ namespace Innoactive.CreatorEditor.BasicInteraction
 
         /// <inheritdoc />
         public override string Key { get; } = "InteractionFrameworkSetup";
-
+        
         /// <summary>
         /// Removes current MainCamera.
         /// </summary>
