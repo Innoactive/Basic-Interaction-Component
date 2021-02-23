@@ -16,6 +16,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
     /// Condition which becomes completed when UsableProperty is used.
     /// </summary>
     [DataContract(IsReference = true)]
+    [HelpLink("https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#use-object")]
     public class UsedCondition : Condition<UsedCondition.EntityData>
     {
         [DisplayName("Use Object")]
