@@ -10,7 +10,7 @@ using Innoactive.Creator.BasicInteraction.Properties;
 namespace Innoactive.Creator.BasicInteraction.Conditions
 {
     /// <summary>
-    /// Condition which is completed when a teleportation action was executed into the referenced <see cref="ITeleportProperty"/>.
+    /// Condition which is completed when a teleportation action was executed into the referenced <see cref="ITeleportationProperty"/>.
     /// </summary>
     [DataContract(IsReference = true)]
     public class TeleportCondition : Condition<TeleportCondition.EntityData>
@@ -20,11 +20,11 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
         public class EntityData : IConditionData
         {
             [DataMember]
-            [DisplayName("Teleport Point")]
+            [DisplayName("Teleportation Point")]
 #if CREATOR_PRO
             [CheckForCollider]
 #endif
-            public ScenePropertyReference<ITeleportProperty> TeleportPoint { get; set; }
+            public ScenePropertyReference<ITeleportationProperty> TeleportationPoint { get; set; }
 
             /// <inheritdoc />
             public bool IsCompleted { get; set; }
@@ -42,13 +42,13 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
         {
         }
 
-        public TeleportCondition(ITeleportProperty teleportPoint, string name = null) : this(TrainingReferenceUtils.GetNameFrom(teleportPoint), name)
+        public TeleportCondition(ITeleportationProperty teleportationPoint, string name = null) : this(TrainingReferenceUtils.GetNameFrom(teleportationPoint), name)
         {
         }
 
         public TeleportCondition(string teleportPoint, string name = "Teleport")
         {
-            Data.TeleportPoint = new ScenePropertyReference<ITeleportProperty>(teleportPoint);
+            Data.TeleportationPoint = new ScenePropertyReference<ITeleportationProperty>(teleportPoint);
             Data.Name = name;
         }
 
@@ -62,13 +62,13 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             public override void Start()
             {
                 base.Start();
-                Data.TeleportPoint.Value.Initialize();
+                Data.TeleportationPoint.Value.Initialize();
             }
 
             /// <inheritdoc />
             protected override bool CheckIfCompleted()
             {
-                return Data.TeleportPoint.Value.WasUsedToTeleport;
+                return Data.TeleportationPoint.Value.WasUsedToTeleport;
             }
         }
 
@@ -81,7 +81,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
             /// <inheritdoc />
             public override void Complete()
             {
-                Data.TeleportPoint.Value.FastForwardTeleport();
+                Data.TeleportationPoint.Value.FastForwardTeleport();
             }
         }
 

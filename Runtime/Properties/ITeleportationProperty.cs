@@ -7,7 +7,7 @@ namespace Innoactive.Creator.BasicInteraction.Properties
     /// <summary>
     /// Interface for <see cref="ISceneObjectProperty"/>s that can be used for teleport into.
     /// </summary>
-    public interface ITeleportProperty : ISceneObjectProperty, ILockable
+    public interface ITeleportationProperty : ISceneObjectProperty, ILockable
     {
         /// <summary>
         /// Emitted when a teleportation action into this <see cref="ISceneObject"/> was done.
@@ -15,7 +15,7 @@ namespace Innoactive.Creator.BasicInteraction.Properties
         event EventHandler<EventArgs> Teleported;
         
         /// <summary>
-        /// True if a teleportation action into this <see cref="ITeleportProperty"/> was done.
+        /// True if a teleportation action into this <see cref="ITeleportationProperty"/> was done.
         /// </summary>
         bool WasUsedToTeleport { get; }
         
