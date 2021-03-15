@@ -46,9 +46,9 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
         {
         }
 
-        public TeleportCondition(string teleportPoint, string name = "Teleport")
+        public TeleportCondition(string teleportationPoint, string name = "Teleport")
         {
-            Data.TeleportationPoint = new ScenePropertyReference<ITeleportationProperty>(teleportPoint);
+            Data.TeleportationPoint = new ScenePropertyReference<ITeleportationProperty>(teleportationPoint);
             Data.Name = name;
         }
 
