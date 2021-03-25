@@ -218,7 +218,7 @@ namespace Innoactive.Creator.BasicInteraction
             return material;
         }
 
-        protected Shader GetShader()
+        protected virtual Shader GetShader()
         {
             string shaderName = GraphicsSettings.currentRenderPipeline ? "Universal Render Pipeline/Lit" : "Standard";
             Shader defaultShader = Shader.Find(shaderName);
