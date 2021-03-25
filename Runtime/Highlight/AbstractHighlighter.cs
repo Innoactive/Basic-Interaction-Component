@@ -232,7 +232,7 @@ namespace Innoactive.Creator.BasicInteraction
             return defaultShader;
         }
 
-        protected bool CanObjectBeHighlighted()
+        protected virtual bool CanObjectBeHighlighted()
         {
             if (enabled == false)
             {
