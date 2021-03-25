@@ -2,7 +2,6 @@
 using Innoactive.Creator.Core.Configuration.Modes;
 using Innoactive.Creator.Core.SceneObjects;
 using Innoactive.Creator.Core.Properties;
-using UnityEngine;
 
 namespace Innoactive.Creator.BasicInteraction.Properties
 {
@@ -24,7 +23,7 @@ namespace Innoactive.Creator.BasicInteraction.Properties
         /// <summary>
         /// Snap zone object.
         /// </summary>
-        GameObject SnapZoneObject { get; }
+        ISnapZone SnapZoneObject { get; }
         
         // TODO: Probably make a IConfigurable interface for modes
         void Configure(IMode mode);
