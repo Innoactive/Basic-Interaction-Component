@@ -203,8 +203,6 @@ namespace Innoactive.Creator.BasicInteraction
             RefreshCachedRenderers();
         }
 
-        
-
         protected void DisableRenders()
         {
             if (highlightMeshRenderer != null)
