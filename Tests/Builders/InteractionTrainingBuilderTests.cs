@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
+using Innoactive.Creator.BasicInteraction;
 using Innoactive.Creator.Core.Properties;
 using Innoactive.Creator.BasicInteraction.Builders;
 using Innoactive.Creator.BasicInteraction.Conditions;
@@ -35,7 +36,7 @@ namespace Innoactive.Creator.Tests.Interaction
             
             public ISnappableProperty SnappedObject { get; set; }
             
-            public GameObject SnapZoneObject { get; }
+            public ISnapZone SnapZoneObject { get; }
             
             public void Configure(IMode mode)
             {
