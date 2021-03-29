@@ -36,7 +36,7 @@ namespace Innoactive.Creator.Tests.Interaction
             
             public ISnappableProperty SnappedObject { get; set; }
             
-            public ISnapZone SnapZoneObject { get; }
+            public GameObject SnapZoneObject { get; }
             
             public void Configure(IMode mode)
             {
