@@ -15,7 +15,7 @@ namespace Innoactive.Creator.BasicInteraction
         private static BaseInteractionSimulator instance;
         
         /// <summary>
-        /// Whoop whoop, this is the current instance of the interaction simulator.
+        /// Current instance of the interaction simulator.
         /// </summary>
         public static BaseInteractionSimulator Instance
         {
