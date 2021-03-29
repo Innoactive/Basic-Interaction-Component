@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Innoactive.Creator.BasicInteraction
 {
     /// <summary>
-    /// Default SnapZone methods.
+    /// Base interface for SnapZone, if you add an custom interaction framework add this interface to your SnapZone implementation. 
     /// </summary>
     public interface ISnapZone
     {

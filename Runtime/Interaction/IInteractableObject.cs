@@ -18,12 +18,12 @@ namespace Innoactive.Creator.BasicInteraction
         bool IsTouchable { set; }
 
         /// <summary>
-        /// Determines if this interactable object  can be grabbed.
+        /// Determines if this interactable object can be grabbed.
         /// </summary>
         bool IsGrabbable { set; }
 
         /// <summary>
-        /// Determines if this interactable object  can be used.
+        /// Determines if this interactable object can be used.
         /// </summary>
         bool IsUsable { set; }
     }

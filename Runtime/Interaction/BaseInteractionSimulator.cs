@@ -6,9 +6,17 @@ using UnityEngine.SceneManagement;
 
 namespace Innoactive.Creator.BasicInteraction
 {
+    /// <summary>
+    /// Base interaction simulator, only have one concrete simulator implementation in your project.
+    /// If no concrete implementation is found a <see cref="BaseInteractionSimulatorDummy"/> will be used.
+    /// </summary>
     public abstract class BaseInteractionSimulator
     {
         private static BaseInteractionSimulator instance;
+        
+        /// <summary>
+        /// Whoop whoop, this is the current instance of the interaction simulator.
+        /// </summary>
         public static BaseInteractionSimulator Instance
         {
             get
@@ -39,14 +47,14 @@ namespace Innoactive.Creator.BasicInteraction
         }
 
         /// <summary>
-        /// Simulates touching the given object. To un touch it again, run the specific method.
+        /// Simulates touching the given object. Expected behavior is that the object stays touched until StopTouch is called.
         /// </summary>
         public abstract void Touch(IInteractableObject interactable);
 
         /// <summary>
-        /// Simulates un touching the given object.
+        /// Simulates stop touching the given object.
         /// </summary>
-        public abstract void UnTouch();
+        public abstract void StopTouch();
 
         /// <summary>
         /// Simulates grabbing the given object.
@@ -59,12 +67,12 @@ namespace Innoactive.Creator.BasicInteraction
         public abstract void Release();
 
         /// <summary>
-        /// Uses and keeps using the given object.
+        /// Simulates usage of the object and keeps using the given object until StopUse is called.
         /// </summary>
         public abstract void Use(IInteractableObject interactable);
 
         /// <summary>
-        /// Stops using the given object.
+        /// Simulates stop using the given object.
         /// </summary>
         public abstract void StopUse(IInteractableObject interactable);
     }
