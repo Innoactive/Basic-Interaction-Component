@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 namespace Innoactive.Creator.BasicInteraction
 {
     /// <summary>
-    /// 
+    /// Base teleportation simulator, only have one concrete simulator implementation in your project.
+    /// If no concrete implementation is found a <see cref="TeleportationSimulatorDummy"/> will be used.
     /// </summary>
     public abstract class BaseTeleportationSimulator
     {
@@ -46,25 +47,24 @@ namespace Innoactive.Creator.BasicInteraction
         }
         
         /// <summary>
-        /// 
+        /// Returns the base class used for teleportation in your VR framework.
         /// </summary>
-        /// <returns></returns>
         public abstract Type GetTeleportationBaseType();
 
         /// <summary>
-        /// 
+        /// Executes a teleport action.
         /// </summary>
-        /// <param name="rig"></param>
-        /// <param name="teleportationObject"></param>
-        /// <param name="targetPosition"></param>
-        /// <param name="targetRotation"></param>
+        /// <param name="rig">The rig object.</param>
+        /// <param name="teleportationObject">The object with the teleportation logic or used to teleport into.</param>
+        /// <param name="targetPosition">Desired position.</param>
+        /// <param name="targetRotation">Desired rotation</param>
         public abstract void Teleport(GameObject rig, GameObject teleportationObject, Vector3 targetPosition, Quaternion targetRotation);
 
         /// <summary>
-        /// 
+        /// True if the provided <paramref name="colliderToValidate"/> is an active collider of the <paramref name="teleportationObject"/>
         /// </summary>
-        /// <param name="teleportationObject"></param>
-        /// <param name="colliderToValidate"></param>
+        /// <param name="teleportationObject">The object with the teleportation logic or used to teleport into.</param>
+        /// <param name="colliderToValidate">Collider to validate.</param>
         /// <returns></returns>
         public abstract bool IsColliderValid(GameObject teleportationObject, Collider colliderToValidate);
     }
