@@ -22,5 +22,12 @@ namespace Innoactive.Creator.BasicInteraction
         {
             Debug.LogWarning(ErrorMessage);
         }
+
+        /// <inheritdoc />
+        public override bool IsColliderValid(GameObject teleportationObject, Collider colliderToValidate)
+        {
+            Debug.LogWarning(ErrorMessage);
+            return false;
+        }
     }
 }

@@ -60,5 +60,12 @@ namespace Innoactive.Creator.BasicInteraction
         /// <param name="targetRotation"></param>
         public abstract void Teleport(GameObject rig, GameObject teleportationObject, Vector3 targetPosition, Quaternion targetRotation);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="teleportationObject"></param>
+        /// <param name="colliderToValidate"></param>
+        /// <returns></returns>
+        public abstract bool IsColliderValid(GameObject teleportationObject, Collider colliderToValidate);
     }
 }
