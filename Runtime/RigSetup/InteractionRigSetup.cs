@@ -52,6 +52,7 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
 
             if (rigProvider != null)
             {
+                rigProvider.PreSetup();
                 Vector3 position = Vector3.zero;
                 Quaternion rotation = new Quaternion();
 
