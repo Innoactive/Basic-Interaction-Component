@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Innoactive.Creator.BasicInteraction
 {
@@ -43,6 +44,26 @@ namespace Innoactive.Creator.BasicInteraction
         public override void StopUse(IInteractableObject interactable)
         {
             Debug.LogWarning(ErrorMessage);
+        }
+        
+        /// <inheritdoc />
+        public override Type GetTeleportationBaseType()
+        {
+            Debug.LogWarning(ErrorMessage);
+            return null;
+        }
+
+        /// <inheritdoc />
+        public override void Teleport(GameObject rig, GameObject teleportationObject, Vector3 targetPosition, Quaternion targetRotation)
+        {
+            Debug.LogWarning(ErrorMessage);
+        }
+
+        /// <inheritdoc />
+        public override bool IsColliderValid(GameObject teleportationObject, Collider colliderToValidate)
+        {
+            Debug.LogWarning(ErrorMessage);
+            return false;
         }
     }
 }

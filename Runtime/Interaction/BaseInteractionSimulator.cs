@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using UnityEngine;
 using Innoactive.Creator.Core.Utils;
 using UnityEngine.SceneManagement;
 
@@ -74,5 +75,27 @@ namespace Innoactive.Creator.BasicInteraction
         /// Simulates stop using the given object.
         /// </summary>
         public abstract void StopUse(IInteractableObject interactable);
+        
+        /// <summary>
+        /// Returns the base class used for teleportation in your VR framework.
+        /// </summary>
+        public abstract Type GetTeleportationBaseType();
+
+        /// <summary>
+        /// Executes a teleport action.
+        /// </summary>
+        /// <param name="rig">The rig object.</param>
+        /// <param name="teleportationObject">The object with the teleportation logic or used to teleport into.</param>
+        /// <param name="targetPosition">Desired position.</param>
+        /// <param name="targetRotation">Desired rotation</param>
+        public abstract void Teleport(GameObject rig, GameObject teleportationObject, Vector3 targetPosition, Quaternion targetRotation);
+
+        /// <summary>
+        /// True if the provided <paramref name="colliderToValidate"/> is an active collider of the <paramref name="teleportationObject"/>
+        /// </summary>
+        /// <param name="teleportationObject">The object with the teleportation logic or used to teleport into.</param>
+        /// <param name="colliderToValidate">Collider to validate.</param>
+        /// <returns></returns>
+        public abstract bool IsColliderValid(GameObject teleportationObject, Collider colliderToValidate);
     }
 }
