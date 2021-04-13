@@ -55,6 +55,14 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
         }
         
         /// <summary>
+        /// Will be called before the rig is instantiated.
+        /// </summary>
+        public virtual void PreSetup()
+        {
+            // Allow additional actions.
+        }
+        
+        /// <summary>
         /// Searches the given prefab name and returns it.
         /// </summary>
         protected GameObject FindPrefab(string prefab)
