@@ -46,12 +46,14 @@ namespace Innoactive.Creator.BasicInteraction
             Debug.LogWarning(ErrorMessage);
         }
 
+        /// <inheritdoc />
 /// <inheritdoc />
         public override void HoverSnapZone(ISnapZone snapZone, IInteractableObject interactable)
         {
             Debug.LogWarning(ErrorMessage);
         }
 
+        /// <inheritdoc />
 /// <inheritdoc />
         public override void UnhoverSnapZone(ISnapZone snapZone, IInteractableObject interactable)
         {
