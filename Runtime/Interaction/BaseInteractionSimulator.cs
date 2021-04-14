@@ -75,6 +75,16 @@ namespace Innoactive.Creator.BasicInteraction
         /// Simulates stop using the given object.
         /// </summary>
         public abstract void StopUse(IInteractableObject interactable);
+
+        /// <summary>
+        /// Simulates a hover over a SnapZone.
+        /// </summary>
+        public abstract void HoverSnapZone(ISnapZone snapZone, IInteractableObject interactable);
+    
+        /// <summary>
+        /// Simulates a unhover over a SnapZone.
+        /// </summary>
+        public abstract void UnhoverSnapZone(ISnapZone snapZone, IInteractableObject interactable);
         
         /// <summary>
         /// Returns the base class used for teleportation in your VR framework.
