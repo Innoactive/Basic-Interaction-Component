@@ -13,6 +13,7 @@ namespace Innoactive.Creator.BasicInteraction.Conditions
     /// Condition which is completed when a teleportation action was executed into the referenced <see cref="ITeleportationProperty"/>.
     /// </summary>
     [DataContract(IsReference = true)]
+    [HelpLink("https://developers.innoactive.de/documentation/creator/latest/articles/innoactive-creator/default-conditions.html#teleport")]
     public class TeleportCondition : Condition<TeleportCondition.EntityData>
     {
         [DisplayName("Teleport")]
