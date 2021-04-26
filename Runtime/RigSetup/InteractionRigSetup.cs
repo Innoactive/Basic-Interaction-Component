@@ -130,7 +130,7 @@ namespace Innoactive.Creator.BasicInteraction.RigSetup
         
         private InteractionRigProvider FindAvailableInteractionRig()
         {
-            IEnumerable<InteractionRigProvider> availableRigs = ReflectionUtils.GetFinalImplementationsOf<InteractionRigProvider>()
+            IEnumerable<InteractionRigProvider> availableRigs = ReflectionUtils.GetConcreteImplementationsOf<InteractionRigProvider>()
                 .Select(type => (InteractionRigProvider) ReflectionUtils.CreateInstanceOfType(type))
                 .Where(provider => provider.CanBeUsed());
 
