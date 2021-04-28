@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Innoactive.Creator.BasicInteraction
 {
     /// <summary>
-    /// Can be used a script on GameObjects to exclude the mesh from the highlight.
+    /// Can be added to GameObjects to exclude them from automatically generated highlights.
     /// If you want to add this to your MonoBehaviour, use <see cref="IExcludeFromHighlightMesh"/>
     /// </summary>
     public sealed class ExcludeFromHighlightMesh : MonoBehaviour, IExcludeFromHighlightMesh

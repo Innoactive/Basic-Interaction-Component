@@ -1,7 +1,7 @@
 namespace Innoactive.Creator.BasicInteraction
 {
     /// <summary>
-    /// Can be used a script on GameObjects to exclude the mesh from the highlight.
+    /// Objects inheriting this interface will be excluded from automatically generated highlights.
     /// </summary>
     public interface IExcludeFromHighlightMesh
     {
