@@ -90,14 +90,6 @@ namespace Innoactive.Creator.BasicInteraction
         /// </summary>
         protected virtual Material CreateHighlightMaterial(Color highlightColor)
         {
-            BaseHighlightProperty property = GetComponent<BaseHighlightProperty>();
-            if (property != null && property.HighlightMaterial != null)
-            {
-                Material highlightPropertyMaterial = new Material(property.HighlightMaterial);
-                highlightPropertyMaterial.color = highlightColor;
-                return highlightPropertyMaterial;
-            }
-            
             return HighlightUtils.CreateDefaultHighlightMaterial(highlightColor);
         }
         
