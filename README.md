@@ -1,6 +1,6 @@
 # Basic Interaction Component
 
-This component serves as an abstraction layer between the Innoactive Creator and concrete implementations like the Unity XR Interaction component or the VRTK Interaction component.
+This [Innoactive Creator](https://github.com/Innoactive/Creator) component serves as an abstraction layer between the Innoactive Creator and concrete implementations like the Unity XR Interaction component or the VRTK Interaction component.
 
 For more information visit: [Creator Core](https://github.com/Innoactive/Creator)
 
